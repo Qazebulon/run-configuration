@@ -1,0 +1,81 @@
+alias restart="source ~/.bash_profile"
+alias update="nvim ~/.bashrc && restart"
+
+alias gu='function _gu(){ git commit -am "gu: $1"; git push; }; _gu'
+alias sc="echo \"Sanity Checked\""
+alias hard='git reset --hard @{u} && git clean -fd'
+alias gsl="git checkout @{-1}"
+alias gp="git push -u origin head"
+alias note="clear && note_step && note_step && note_step"
+alias note_step="cd /c/ObsidianVault && git add . && git commit -am 'sync' | git pull && git push"
+
+alias list="echo 'Todo...'"
+alias proj="cd ~/projects && ls"
+alias codeit="code -r ."
+#alias serve="py -m http.server 8000"
+alias serve="npx http-server -o ./"
+
+#alias start="yarn start"
+alias lint="yarn lint"
+# alias test="yarn test"
+alias build="yarn build"
+alias deploy="yarn deploy"
+
+# Organizations
+alias org="cd /g/Organizations"
+alias lumen="org && cd Lumen/Vault/Lumen\ Tabletop\ Game/Versions"
+
+# CurrentProject
+alias c="cd /"
+
+# AssemblyScript
+alias create-as='npm init && npm install --save @assemblyscript/loader && npm install --save-dev assemblyscript && npx asinit .'
+
+# Svelte
+alias create-svelte='npm create vite@latest'
+
+# SvelteKit
+create-sveltekit () { npm create svelte@latest "$@"; }
+
+# NextJS
+alias next='cd /c/next && ls'
+alias create-nextjs='yarn create next-app -e https://github.com/vercel/next.js/tree/master/examples/with-typescript-eslint-jest'
+
+# CurrentStack
+new-gh () { gh repo create "$@" --public; }
+function new () { 
+    local project=$@
+    npm create vite@latest $project
+    echo 'Navigating to new project: '$project
+    cd $project
+    echo 'Initializing Repo'
+    npm i
+    git init
+    git checkout -b main
+    git add .
+    git commit -am "Initial Commit"
+    gh repo create $project --public --source . --push
+    echo 'Initialization Complete!'
+    local project=''
+}
+function template () {
+    local project=$@
+    echo 'Creating New Project'
+    gh repo create $project --public --template https://github.com/Qazebulon/svelte-template
+    # gh repo clone https://github.com/Qazebulon/$project
+    # cd $project
+    # echo 'Installing Project Dependencies'
+    # npm i
+    # local project=''
+    # echo 'Setup Complete'
+    # code .
+}
+
+# Neo Vim Testing
+alias nvd='cd ~/AppData/Local/nvim'
+alias nve='nvim ~/AppData/Local/nvim'
+n () {
+	nvim .
+}
+alias a='~/Desktop/Alacritty-v0.12.2-portable.exe --working-directory=$PWD'
+
